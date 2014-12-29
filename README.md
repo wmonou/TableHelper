@@ -6,13 +6,13 @@ Usage of Table Helper
 
 On your controller
 
-<code>
+```
 $this->set('users', $this->paginate('Property'));
-</code>
+```
 
 You have array set on your controller for your data
 
-<code>
+```
 	$properties = array(
 	 	0 => array(
 	 		'Property' => array(
@@ -34,11 +34,11 @@ You have array set on your controller for your data
 	 	)
 		...
 	);
-</code>
+```
 
 You want to show some field of your properties data
 
-<code>
+```
 	$displayFields = array(
 		'Type' => 'type',
 		Address1' => 'Address.address1',
@@ -51,11 +51,11 @@ You want to show some field of your properties data
 	    'Price' => 'price',
 	    'Bedrooms' => 'num_bedrooms'
 	);
-</code>
+```
 
 You have action for each row
 
-<code>
+```
 	$actions = array(
 		'View' => array(
 			'urlPrefix' => '/properties/view/', 	// urlPrefix -- mandatory
@@ -72,13 +72,13 @@ You have action for each row
 	  		'options' => array()
 	  	)
 	);
-</code>
+```
 
 You want to generate the table
 
-<code>
+```
 	echo $this->Table->createTable('Property', $properties, $displayFields, $tableOption, $actions);
-</code>
+```
 
 Hope this will simplify your projects
 
