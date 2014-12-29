@@ -7,12 +7,15 @@ To display retrieved entry in table with sorting and pagination feature.
 Usage of Table Helper
 
 On your controller
+
 <code>
 $this->set('users', $this->paginate('Property'));
 </code>
 
 You have array set on your controller for your data
+
 <code>
+
 $properties = array(
  	0 => array(
  		'Property' => array(
@@ -23,7 +26,7 @@ $properties = array(
  			'type' => apartment
  			'num_bedrooms' => 1
  		)
- 		'Address'] => array(
+ 		'Address' => array(
 			'id' => 96
  			'address1' => 650 Columbus Ave
  			'address2' =>
@@ -37,6 +40,7 @@ $properties = array(
 </code>
 
 You want to show some field of your properties data
+
 <code>
 $displayFields = array(
 	'Type' => 'type',
@@ -45,7 +49,7 @@ $displayFields = array(
 		'fieldName' => 'Address.city',		// Fielname for entry -- mandatory
 		'urlPrefix' => '/city/index/'		// Url for entry -- mandatory
         'urlParam'  => 'Address.city'		// Linking to Address.city -- mandatory or fill null
-	),										
+	),
     'State' => 'Address.city',
     'Price' => 'price',
     'Bedrooms' => 'num_bedrooms'
@@ -53,6 +57,7 @@ $displayFields = array(
 </code>
 
 You have action for each row
+
 <code>
 $actions = array(
 	'View' => array(
@@ -60,16 +65,20 @@ $actions = array(
 		'urlParam' =>'Property.id', 			// Linking to property id -- mandatory or fill null
   		'iconClass' => 'fa fa-eye',			    // Usage font-awesome class
   		'confirm' => 'are you sure?',			// Html helper confirm
-  		'options' => array()),					// Html helper options
-        'Edit Address' => array(
+  		'options' => array()
+  		),					// Html helper options
+    'Edit Address' => array(
   		'urlPrefix' => '/address/edit/',
   		'fieldName' =>'Address.id',
   		'iconClass' => 'fa fa-pencil',
   		'confirm' => 'are you sure?',
-  		'options' => array()));
+  		'options' => array()
+  	)
+);
 </code>
 
 You want to generate the table
+
 <code>
 echo $this->Table->createTable('Property', $properties, $displayFields, $tableOption, $actions);
 </code>
