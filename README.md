@@ -1,10 +1,8 @@
-TableHelper
-===========
-
 Cakephp TableHelper
+==================
 To display retrieved entry in table with sorting and pagination feature.
-@author ”Yusuf Widiyatmono <yusuf.widiyatmono@wmonou.com>”
-modified from steveklebanoff https://github.com/steveklebanoff/cakephp-table-helper/blob/master/table.php
+- author ”Yusuf Widiyatmono <yusuf.widiyatmono@wmonou.com>”
+- modified from steveklebanoff https://github.com/steveklebanoff/cakephp-table-helper/blob/master/table.php
 
 <code>
 // Usage of Table Helper
