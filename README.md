@@ -4,35 +4,40 @@ To display retrieved entry in table with sorting and pagination feature.
 - author ”Yusuf Widiyatmono <yusuf.widiyatmono@wmonou.com>”
 - modified from steveklebanoff https://github.com/steveklebanoff/cakephp-table-helper/blob/master/table.php
 
-<code>
-// Usage of Table Helper
-// On your controller
-$this->set('users', $this->paginate('Property'));
+Usage of Table Helper
 
-// You have array set on your controller for your data
+On your controller
+<code>
+$this->set('users', $this->paginate('Property'));
+</code>
+
+You have array set on your controller for your data
+<code>
 $properties = array(
- 	[0] => array(
- 		['Property'] => array(
-			['id'] => 12
- 			['address_id'] => 96
- 			['description'] => An okay apartment
- 			['price'] => 300
- 			['type'] => apartment
- 			['num_bedrooms'] => 1
+ 	0 => array(
+ 		'Property' => array(
+			'id' => 12
+ 			'address_id' => 96
+ 			'description' => An okay apartment
+ 			'price' => 300
+ 			'type' => apartment
+ 			'num_bedrooms' => 1
  		)
- 		['Address'] => array(
-			['id'] => 96
- 			['address1'] => 650 Columbus Ave
- 			['address2'] =>
- 			['city'] => Boston
-			['state'] => MA
-			['zip'] => 1104
+ 		'Address'] => array(
+			'id' => 96
+ 			'address1' => 650 Columbus Ave
+ 			'address2' =>
+ 			'city' => Boston
+			'state' => MA
+			'zip' => 1104
  		)
  	)
 	...
 );
+</code>
 
-// You want to show some field of your properties data
+You want to show some field of your properties data
+<code>
 $displayFields = array(
 	'Type' => 'type',
 	Address1' => 'Address.address1',
@@ -45,7 +50,10 @@ $displayFields = array(
     'Price' => 'price',
     'Bedrooms' => 'num_bedrooms'
 );
-// You have action for each row
+</code>
+
+You have action for each row
+<code>
 $actions = array(
 	'View' => array(
 		'urlPrefix' => '/properties/view/', 	// urlPrefix -- mandatory
@@ -59,7 +67,9 @@ $actions = array(
   		'iconClass' => 'fa fa-pencil',
   		'confirm' => 'are you sure?',
   		'options' => array()));
+</code>
 
-// You want to generate the table
+You want to generate the table
+<code>
 echo $this->Table->createTable('Property', $properties, $displayFields, $tableOption, $actions);
 </code>
