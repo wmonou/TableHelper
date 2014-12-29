@@ -1,5 +1,5 @@
-Pukis
-=====
+CakePHP TableHelper
+===================
 Ajax user management dashboard
 - Demo : http://pukis.kodehive.com
 - Username : superdemo, admindemo, userdemo
@@ -27,37 +27,83 @@ Installation :
 Sorry - there is no automatic instalation procedure yet, but you are programmer should be easily to do it.
 
 To implement ajax view on your view, jQuery ajax has been encapsulate to be a simple function
+
+Usage of Table Helper
+
+On your controller
+
 <code>
+$this->set('users', $this->paginate('Property'));
+</code>
 
-	$(document).ready(function(){
+You have array set on your controller for your data
 
-		// classes
-		var pukisRequest = new PUKISAPP.BEHAVIOR.PUKIS.ajax();
+<code>
+	$properties = array(
+	 	0 => array(
+	 		'Property' => array(
+				'id' => 12
+	 			'address_id' => 96
+	 			'description' => An okay apartment
+	 			'price' => 300
+	 			'type' => apartment
+	 			'num_bedrooms' => 1
+	 		)
+	 		'Address' => array(
+				'id' => 96
+	 			'address1' => 650 Columbus Ave
+	 			'address2' =>
+	 			'city' => Boston
+				'state' => MA
+				'zip' => 1104
+	 		)
+	 	)
+		...
+	);
+</code>
 
-		// for every click on your view
-		// pukisRequest.ajaxRequest(object, target, renderElement);
-		// for link
-		$('.users-users-admin-edit a').click(function(e){
-			e.preventDefault();
-			pukisRequest.ajaxRequest(this, this.href, '.body');
-		});
+You want to show some field of your properties data
 
-		// for form
-		// default ajax type is get, to change to post use
-		// pukisRequest.ajaxType(type)
-		$('.users-users-admin-edit form').submit(function(e){
-			e.preventDefault();
-			pukisRequest.ajaxType('post').ajaxRequest(this, this.action, '.body');
-		});
+<code>
+	$displayFields = array(
+		'Type' => 'type',
+		Address1' => 'Address.address1',
+		City' => array(							// if its array, the entry generated will have links
+			'fieldName' => 'Address.city',		// Fielname for entry -- mandatory
+			'urlPrefix' => '/city/index/'		// Url for entry -- mandatory
+	        'urlParam'  => 'Address.city'		// Linking to Address.city -- mandatory or fill null
+		),
+	    'State' => 'Address.city',
+	    'Price' => 'price',
+	    'Bedrooms' => 'num_bedrooms'
+	);
+</code>
 
-		// default ajax data is null or form serialize it its post, to change for custum data
-		// pukisRequest.ajaxData(data)
-		$('.users-users-admin-edit form').submit(function(e){
-			data = {id: 1, name: 'a name'}
-			pukisRequest.ajaxType('post').ajaxData(data).ajaxRequest(this, this.action, '.body');
-		});
-	})
+You have action for each row
 
+<code>
+	$actions = array(
+		'View' => array(
+			'urlPrefix' => '/properties/view/', 	// urlPrefix -- mandatory
+			'urlParam' =>'Property.id', 			// Linking to property id -- mandatory or fill null
+	  		'iconClass' => 'fa fa-eye',			    // Usage font-awesome class
+	  		'confirm' => 'are you sure?',			// Html helper confirm
+	  		'options' => array()
+	  		),					// Html helper options
+	    'Edit Address' => array(
+	  		'urlPrefix' => '/address/edit/',
+	  		'fieldName' =>'Address.id',
+	  		'iconClass' => 'fa fa-pencil',
+	  		'confirm' => 'are you sure?',
+	  		'options' => array()
+	  	)
+	);
+</code>
+
+You want to generate the table
+
+<code>
+	echo $this->Table->createTable('Property', $properties, $displayFields, $tableOption, $actions);
 </code>
 
 Hope this will simplify your projects
